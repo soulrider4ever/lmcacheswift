@@ -1,0 +1,65 @@
+--- a/lmcache/integration/vllm/lmcache_mp_connector.py
++++ b/lmcache/integration/vllm/lmcache_mp_connector.py
+@@ -602,6 +602,18 @@
+         scheduler_block_size = get_vllm_scheduler_block_size(
+             vllm_config, kv_cache_config
+         )
++        self._lookup_replay_tokens = vllm_config.kv_transfer_config.get_from_extra_config(
++            "lmcache.mp.lookup_replay_tokens", 0
++        )
++        if (
++            type(self._lookup_replay_tokens) is not int
++            or self._lookup_replay_tokens < 0
++            or self._lookup_replay_tokens % scheduler_block_size
++        ):
++            raise ValueError(
++                "lmcache.mp.lookup_replay_tokens must be a non-negative "
++                "multiple of scheduler_block_size"
++            )
+         cache_model_name = get_dcp_decorated_model_name(vllm_config, kv_cache_config)
+ 
+         assert vllm_config.kv_transfer_config is not None
+@@ -1324,7 +1336,20 @@
+ 
+         assert ret % self.scheduler_adapter.lmcache_tokens_per_chunk == 0
+ 
++        # Keep the full remote match for STORE accounting. Truncating the
++        # lookup itself would hide an already stored tail and re-offload it.
+         tracker.num_stored_tokens = ret
++        if self._lookup_replay_tokens:
++            token_ids = tracker.get_token_ids()
++            chunk_size = self.scheduler_adapter.lmcache_tokens_per_chunk
++            replay_limit = max(
++                0,
++                len(token_ids)
++                - self._lookup_replay_tokens
++                - int(self._reserve_last_token_for_lookup),
++            ) // chunk_size * chunk_size
++            load_hit = min(ret, replay_limit)
++            ret = load_hit
+         tracker.num_lmcache_hit_tokens = ret
+ 
+         need_to_load = max(0, ret - num_computed_tokens)
+@@ -1431,6 +1456,22 @@
+             )
+             # Clean up lookup future in scheduler adapter
+             self.scheduler_adapter.cleanup_lookup_result(request.request_id)
++
++            # Admission is the one-shot transition out of PREFETCHING.
++            # Release the unused replay tail here, not during lookup polling:
++            # allocation may be retried and must not decrement readers twice.
++            if (
++                self._lookup_replay_tokens
++                and tracker.num_stored_tokens > tracker.num_lmcache_hit_tokens
++            ):
++                self.scheduler_adapter.free_lookup_locks(
++                    token_ids=tracker.get_token_ids(),
++                    start=tracker.num_lmcache_hit_tokens,
++                    end=tracker.num_stored_tokens,
++                    request_id=request.request_id,
++                    cache_salt=tracker.cache_salt,
++                    request_configs=tracker.request_configs,
++                )
+ 
+             # Free locks on chunks that vLLM already computed and won't
+             # retrieve from LMCache.

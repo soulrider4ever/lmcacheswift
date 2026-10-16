@@ -1,0 +1,145 @@
+{
+  "hfId": "rovangju/Swift-Qwen3.8-27b-W8A8",
+  "modelRevision": "bf37ab853e8dafbd531dee9cb6d0fbe813b69873",
+  "hardware": {
+    "hwClass": "DISCRETE_GPU",
+    "gpuName": "AMD Instinct MI210",
+    "gpuCount": 1,
+    "vramGb": 64,
+    "cpu": "Intel Xeon Platinum 8268",
+    "ramGb": 100.93,
+    "os": "Ubuntu 24.04.5 LTS"
+  },
+  "engineName": "vllm",
+  "engineVersion": "0.1.dev1+g12dadcb41",
+  "engineRepository": "https://github.com/davetha/vllm",
+  "engineBuild": "Custom ROCm 10/gfx90a vLLM MTP build; image digest sha256:275f7b6b258fa87a2e22cf796ea9548bab78953ebe87ce45ff65eee1cd15bdef",
+  "engineCommit": "12dadcb4134ab41cf99b60a22e1222b7479e1a58",
+  "backend": "rocm",
+  "quantization": "INT8_W8A8",
+  "promptTokens": 266,
+  "outputTokens": 1024,
+  "contextLength": 262144,
+  "batchSize": 1,
+  "prefillTokens": 0,
+  "ttftMs": 246.32620811462402,
+  "tokSOut": 71.76796883278082,
+  "tokSPrefill": 1142.9775545514633,
+  "tokSTotal": 88.92002247697033,
+  "peakVramGb": 64.489,
+  "notes": "LocalMaxxing canonical reasoning-v1 prompt, exact canonical SHA-256; one warmup excluded and three measured serial requests, temperature 0/seed 42, thinking disabled. 1024-token cap with 256-token minimum; representative fields and output are from the median-decode measured request. Per-request MTP counters are Prometheus before/after deltas; MTP width is fixed at 3. No nonce or cache reset: service benchmarked as deployed; canonical266-token prompt is below800-token cache geometry; observed hit deltas recorded. Peak VRAM is one-second AMD-SMI total-device used-VRAM sampling on the MI210 LXC; amd-smi process listing returned no processes, so memory is not process-attributed. Speed verification is not an answer-quality score. Live image includes local Qwen draft-group/coordinator and Mamba replay-retention/admission patches, plus untuned gfx942 AITER configuration copied for gfx90a; LMCache PR4410 CPU transfer baseline with Python metadata override. Output truncates at1024 tokens before completing all four sections; not an accuracy claim. Decode uses(outputTokens-1)/server decode time. Zero cache hits observed.",
+  "engineFlags": {
+    "commandSnippet": "vllm serve /models/swift-qwen38 --served-model-name qwen38-swift-w8a8 --trust-remote-code --tensor-parallel-size 1 --max-num-seqs 8 --max-num-batched-tokens 1567 --max-model-len 262144 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.99 --attention-backend ROCM_AITER_FA --async-scheduling --compilation-config '{\"cudagraph_mode\":\"FULL_DECODE_ONLY\"}' --enable-chunked-prefill --reasoning-parser qwen3 --host 0.0.0.0 --port 8092 --seed 42 --enable-prefix-caching --enable-auto-tool-choice --tool-call-parser qwen3_xml --kv-transfer-config '{\"kv_connector\": \"LMCacheMPConnector\", \"kv_connector_module_path\": \"lmcache.integration.vllm.lmcache_mp_connector\", \"kv_role\": \"kv_both\", \"kv_connector_extra_config\": {\"lmcache.mp.host\": \"tcp://192.168.1.107\", \"lmcache.mp.port\": 5556, \"lmcache.mp.mp_transfer_mode\": \"engine_driven\", \"lmcache.mp.isolated_ipc\": true, \"lmcache.mp.lookup_replay_tokens\": 800}}' --mamba-cache-mode align --speculative-config '{\"method\": \"mtp\", \"num_speculative_tokens\": 3}'",
+    "tensorParallel": 1,
+    "concurrency": 1,
+    "maxRunningSeqs": 8,
+    "gpuMemUtil": 0.99,
+    "kvCacheDtype": "bf16",
+    "prefixCaching": true,
+    "chunkedPrefill": true,
+    "prefillChunkSize": 1567,
+    "attentionBackend": "ROCM_AITER_FA",
+    "specDecoding": true,
+    "specMethod": "mtp",
+    "specNumTokens": 3,
+    "mtpEnabled": true,
+    "specDraftTokens": 987,
+    "specAcceptedTokens": 696,
+    "specAcceptanceRate": 0.7051671732522796,
+    "specMeanAcceptedLength": 3.115501519756839,
+    "temperature": 0,
+    "topP": 1,
+    "extraFlags": "Canonical reasoning-v1; 1 warmup excluded + 3 measured serial requests; max_tokens=1024, min_tokens=256; thinking disabled; stream_options.include_usage; Prefix caching enabled; actual per-response hits recorded. Remote LMCache 40 GiB/chunk800; replay reserve800. Canonical prompt is shorter than one800-token block; no cache reset or service restart."
+  },
+  "promptSha256": "9000edaadb16fc77ab78b39917245a03d4d7585c3ba770cb045a47a0e0683445",
+  "promptSample": "You are helping a small robotics club plan a weekend build. Work through each part carefully and show your reasoning.\n\n1. The club has 7 members and a budget of 412 dollars. A motor driver costs 18.50, a microcontroller 23.75, and each member wants one of each plus a shared 3D-printer spool at 27.90. After buying everything, they split the remainder evenly on batteries priced at 6.35 each. How many batteries can they buy in total, and how much money is left over?\n\n2. Two members disagree about wheel size. Alice says a larger wheel gives more torque at the ground; Ben says it gives more speed. Explain who is right, what tradeoff is actually involved, and how gear ratio changes the answer.\n\n3. Write a short, plain-English procedure (six to nine steps) for safely testing a new motor circuit for the first time, including what to check before applying power.\n\n4. Finally, propose one creative feature for the robot that would be unusual for a club project, and give two concrete risks with how you would mitigate each.\n\nAnswer all four parts in order with clear headings.",
+  "outputSha256": "540f6f5cde4eaa4ca851450de59dd3187bf8087b54d7c364a38b70fcf103549c",
+  "outputSample": "### 1. Budget Calculation\n\nTo determine how many batteries the club can buy and the remaining balance, we must first calculate the total cost of the required components and the shared spool.\n\n**Step 1: Calculate the cost of individual components per member.**\nEach member needs one motor driver and one microcontroller.\n*   Cost per member = Cost of Motor Driver + Cost of Microcontroller\n*   Cost per member = $18.50 + $23.75 = $42.25\n\n**Step 2: Calculate the total cost for all 7 members.**\n*   Total member cost = 7 members \u00d7 $42.25/member\n*   Total member cost = $295.75\n\n**Step 3: Add the cost of the shared 3D-printer spool.**\n*   Total component cost = Total member cost + Spool cost\n*   Total component cost = $295.75 + $27.90 = $323.65\n\n**Step 4: Determine the remaining budget for batteries.**\n*   Remaining budget = Total Budget - Total component cost\n*   Remaining budget = $412.00 - $323.65 = $88.35\n\n**Step 5: Calculate the number of batteries that can be purchased.**\nThe batteries cost $6.35 each. We divide the remaining budget by the price per battery and take the integer part (since they cannot buy a fraction of a battery).\n*   Number of batteries = $\\lfloor 88.35 / 6.35 \\rfloor$\n*   $88.35 / 6.35 \\approx 13.913$\n*   Number of batteries = 13\n\n**Step 6: Calculate the final leftover money.**\n*   Cost of 13 batteries = 13 \u00d7 $6.35 = $82.55\n*   Leftover money = Remaining budget - Cost of batteries\n*   Leftover money = $88.35 - $82.55 = $5.80\n\n**Conclusion:**\nThey can buy **13** batteries in total, and they will have **$5.80** left over.\n\n***\n\n### 2. Wheel Size, Torque, and Speed\n\n**Who is right?**\nNeither Alice nor Ben is entirely right in isolation; they are both describing one side of a fundamental mechanical tradeoff. However, **Ben is closer to the standard definition of \"speed\"**, while **Alice is confusing torque at the wheel with torque at the motor**.\n\n**The Tradeoff:**\nThe core tradeoff is between **linear speed** and **rotational force (traction/torque at the ground)**.\n*   **Larger Wheels:** For a given motor RPM (revolutions per minute), a larger wheel covers more distance per rotation. Therefore, larger wheels increase the robot's top speed. However, because the wheel has a larger radius, the force required to turn it (torque) increases for the same amount of acceleration. This makes it harder for the motor to accelerate the robot from a standstill or climb steep hills.\n*   **Smaller Wheels:** Smaller wheels result in lower top speed for the same motor RPM. However, they require less torque to accelerate, making the robot feel \"snappier\" and better at climbing or accelerating quickly.\n\n**The Role of Gear Ratio:**\nGear ratio is the variable that decouples wheel size from the final performance.\n*   **High Gear Ratio (e.g., 10:1):** The motor spins 10 times for every 1 turn of the wheel. This multiplies the motor's torque by 10 (making it easier to turn the wheel) but divides the speed by 10.\n*   **Low Gear Ratio (e.g., 1:1):** The motor and wheel spin at the same speed. This provides maximum speed but minimum torque multiplication.\n\n**How Gear Ratio Changes the Answer:**\nIf Alice wants high torque at the ground, she doesn't necessarily need a larger wheel; she needs a **higher gear ratio**. A small wheel with a high gear ratio can provide high torque and low speed. A large wheel with a low gear ratio can provide high speed and low torque.\n*   **Correct Engineering View:** Wheel size determines the *distance per rotation*. Gear ratio determines the *tradeoff between speed and torque* available from the motor. You can achieve high torque with small wheels (high gear ratio) or high speed with large wheels (low gear ratio). The \"right\" choice depends on whether the robot needs to be fast (Ben) or strong (Alice), and gear ratio is the primary tool to adjust that balance, not just wheel diameter.\n\n***\n\n### ",
+  "engineTimingsRaw": {
+    "source": "vLLM Prometheus request histogram/counter deltas plus OpenAI-compatible streamed terminal usage",
+    "warmupExcluded": true,
+    "measurementCount": 3,
+    "representativeRun": "measured-2",
+    "representativeServer": {
+      "serverPrefillSeconds": 0.2327254799893126,
+      "serverDecodeSeconds": 14.254269929020666,
+      "serverTtftSeconds": 0.24632620811462402,
+      "tokSPrefill": 1142.9775545514633,
+      "tokSOut": 71.76796883278082,
+      "tokSTotalClient": 88.92002247697033,
+      "clientWallSeconds": 14.507418735011015,
+      "clientTtftSeconds": 0.2522333590313792
+    },
+    "terminalUsage": {
+      "prompt_tokens": 266,
+      "total_tokens": 1290,
+      "completion_tokens": 1024,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "representativeRequestMtp": {
+      "specDraftTokens": 987,
+      "specAcceptedTokens": 696,
+      "specAcceptanceRate": 0.7051671732522796,
+      "specMeanAcceptedLength": 3.115501519756839,
+      "specTokenConsistencyDelta": -1.0
+    },
+    "perRun": [
+      {
+        "label": "measured-1",
+        "promptTokens": 266,
+        "completionTokens": 1024,
+        "tokSPrefill": 1152.1819307376927,
+        "tokSOut": 72.14835121295556,
+        "tokSTotal": 89.38739208529314,
+        "ttftMs": 246.00601196289062,
+        "clientWallSeconds": 14.43156545801321,
+        "outputSha256": "540f6f5cde4eaa4ca851450de59dd3187bf8087b54d7c364a38b70fcf103549c",
+        "specDraftTokens": 987,
+        "specAcceptedTokens": 696,
+        "prefixCacheHitTokenDelta": 0.0
+      },
+      {
+        "label": "measured-2",
+        "promptTokens": 266,
+        "completionTokens": 1024,
+        "tokSPrefill": 1142.9775545514633,
+        "tokSOut": 71.76796883278082,
+        "tokSTotal": 88.92002247697033,
+        "ttftMs": 246.32620811462402,
+        "clientWallSeconds": 14.507418735011015,
+        "outputSha256": "540f6f5cde4eaa4ca851450de59dd3187bf8087b54d7c364a38b70fcf103549c",
+        "specDraftTokens": 987,
+        "specAcceptedTokens": 696,
+        "prefixCacheHitTokenDelta": 0.0
+      },
+      {
+        "label": "measured-3",
+        "promptTokens": 266,
+        "completionTokens": 1024,
+        "tokSPrefill": 1075.5945348280686,
+        "tokSOut": 71.62429000698744,
+        "tokSTotal": 88.65178154564413,
+        "ttftMs": 261.2888813018799,
+        "clientWallSeconds": 14.551315015996806,
+        "outputSha256": "540f6f5cde4eaa4ca851450de59dd3187bf8087b54d7c364a38b70fcf103549c",
+        "specDraftTokens": 987,
+        "specAcceptedTokens": 696,
+        "prefixCacheHitTokenDelta": 0.0
+      }
+    ],
+    "decodeRangeTokS": [
+      71.62429000698744,
+      72.14835121295556
+    ],
+    "outputHashesIdentical": true,
+    "measurementCacheHitTokens": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "decodeFormula": "(outputTokens-1)/serverDecodeSeconds",
+    "memoryAttribution": "Same-request one-second AMD-SMI total-device used VRAM; not process-attributed."
+  }
+}

@@ -1,0 +1,5 @@
+FROM local/vllm-mi210:lmcache-layout-20261015
+# Candidate-only experimental tuning fallback: gfx942 generic Triton config on gfx90a.
+# Validate all kernels/correctness/latency before any promotion.
+COPY gfx90a-fallback/DEFAULT.json /opt/python/lib/python3.14/site-packages/aiter/ops/triton/configs/gfx90a/triton/attention/unified_attention/DEFAULT.json
+LABEL aiter.experimental_config="gfx942-unified-default-on-gfx90a-20261015"

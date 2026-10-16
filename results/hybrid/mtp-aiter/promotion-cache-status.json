@@ -1,0 +1,25 @@
+{
+  "production": {
+    "healthy": true,
+    "chunk_size": 784,
+    "active_sessions": 0,
+    "object_count": 160,
+    "read_locks": 0,
+    "write_locks": 0,
+    "main_pid": 1780
+  },
+  "mtp": {
+    "healthy": true,
+    "chunk_size": 800,
+    "active_sessions": 0,
+    "object_count": 112,
+    "read_locks": 0,
+    "write_locks": 0,
+    "main_pid": 2234
+  },
+  "mtp_boot_unit": {
+    "name": "lmcache-mtp-server.service",
+    "enabled": "enabled",
+    "state": "inactive"
+  }
+}

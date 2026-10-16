@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-10-16T01:42:35.396586+00:00",
+  "healthHttp": 200,
+  "healthBodyBytes": 0,
+  "modelsHttp": 200,
+  "servedModel": {
+    "id": "qwen38-swift-w8a8",
+    "object": "model",
+    "created": 1792114955,
+    "owned_by": "vllm",
+    "root": "/models/swift-qwen38",
+    "parent": null,
+    "max_model_len": 262144,
+    "permission": [
+      {
+        "id": "modelperm-ba09e46d5cc8e936",
+        "object": "model_permission",
+        "created": 1792114955,
+        "allow_create_engine": false,
+        "allow_sampling": true,
+        "allow_logprobs": true,
+        "allow_search_indices": false,
+        "allow_view": true,
+        "allow_fine_tuning": false,
+        "organization": "*",
+        "group": null,
+        "is_blocking": false
+      }
+    ]
+  },
+  "promptSha256": "9000edaadb16fc77ab78b39917245a03d4d7585c3ba770cb045a47a0e0683445"
+}

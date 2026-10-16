@@ -1,0 +1,54 @@
+--- a/lmcache/integration/vllm/lmcache_mp_connector.py
++++ b/lmcache/integration/vllm/lmcache_mp_connector.py
+@@ -602,6 +602,20 @@
+         scheduler_block_size = get_vllm_scheduler_block_size(
+             vllm_config, kv_cache_config
+         )
++        # Opt-in: leave a local replay tail instead of retrieving past the
++        # checkpoint that speculative hybrid prefix lookup can reuse.
++        self._lookup_replay_tokens = vllm_config.kv_transfer_config.get_from_extra_config(
++            "lmcache.mp.lookup_replay_tokens", 0
++        )
++        if (
++            type(self._lookup_replay_tokens) is not int
++            or self._lookup_replay_tokens < 0
++            or self._lookup_replay_tokens % scheduler_block_size
++        ):
++            raise ValueError(
++                "lmcache.mp.lookup_replay_tokens must be a non-negative "
++                "multiple of scheduler_block_size"
++            )
+         cache_model_name = get_dcp_decorated_model_name(vllm_config, kv_cache_config)
+ 
+         assert vllm_config.kv_transfer_config is not None
+@@ -1222,6 +1236,12 @@
+             if self.lazy_offload:
+                 self._lazy_offload_manager.bind_block_pool(gpu_block_pool)
+ 
++    def _get_lookup_token_ids(self, tracker: LMCacheMPRequestTracker):
++        token_ids = tracker.get_token_ids()
++        if self._lookup_replay_tokens:
++            return token_ids[:max(0, len(token_ids) - self._lookup_replay_tokens)]
++        return token_ids
++
+     def get_num_new_matched_tokens(
+         self,
+         request: "Request",
+@@ -1294,7 +1314,7 @@
+             tracker.lookup_started_at = time.monotonic()
+         self.scheduler_adapter.maybe_submit_lookup_request(
+             request.request_id,
+-            token_ids=tracker.get_token_ids(),
++            token_ids=self._get_lookup_token_ids(tracker),
+             cache_salt=tracker.cache_salt,
+             request_configs=tracker.request_configs,
+             reserve_last_token=self._reserve_last_token_for_lookup,
+@@ -1366,7 +1386,7 @@
+             tracker.lookup_started_at = time.monotonic()
+         self.scheduler_adapter.maybe_submit_lookup_request(
+             request.request_id,
+-            token_ids=tracker.get_token_ids(),
++            token_ids=self._get_lookup_token_ids(tracker),
+             cache_salt=tracker.cache_salt,
+             request_configs=tracker.request_configs,
+             reserve_last_token=self._reserve_last_token_for_lookup,

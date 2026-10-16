@@ -1,0 +1,27 @@
+# Original standalone no-MTP cache unit (currently stopped+disabled; kept as fallback).
+[Unit]
+Description=LMCache standalone CPU KV cache server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=lmcache
+Group=lmcache
+WorkingDirectory=/var/lib/lmcache
+Environment=LMCACHE_DISABLE_BANNER=1
+Environment=LMCACHE_TRACK_USAGE=false
+ExecStart=/opt/lmcache/.venv/bin/lmcache server --transport zmq --host 0.0.0.0 --port 5555 --l1-size-gb 40 --eviction-policy LRU --supported-transfer-mode engine_driven --http-host 127.0.0.1 --http-port 8080 --disable-metrics --no-run-script-api-enabled
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+LimitNOFILE=65536
+StateDirectory=lmcache
+StateDirectoryMode=0750
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

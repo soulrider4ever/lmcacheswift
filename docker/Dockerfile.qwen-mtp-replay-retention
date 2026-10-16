@@ -1,0 +1,3 @@
+FROM local/vllm-mi210:lmcache-aiter-mtp-qwen-fixedpoint-diag-20261015
+COPY single_type_kv_cache_manager.qwen_mtp_retention.py /opt/python/lib/python3.14/site-packages/vllm/v1/core/single_type_kv_cache_manager.py
+LABEL mtp.experimental_replay_retention="20261016"

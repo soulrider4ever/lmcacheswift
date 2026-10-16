@@ -1,0 +1,22 @@
+{
+  "production": {
+    "healthy": true,
+    "chunk_size": 784,
+    "active_sessions": 0,
+    "object_count": 160,
+    "read_locks": 0,
+    "write_locks": 0,
+    "memory_used_bytes": 8220835840,
+    "main_pid": 1780
+  },
+  "experiment": {
+    "healthy": true,
+    "chunk_size": 800,
+    "active_sessions": 0,
+    "object_count": 118,
+    "read_locks": 0,
+    "write_locks": 0,
+    "memory_used_bytes": 6278348800,
+    "main_pid": 2234
+  }
+}

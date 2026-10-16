@@ -1,0 +1,39 @@
+diff --git a/lmcache/integration/vllm/kv_cache_group_edits.py b/lmcache/integration/vllm/kv_cache_group_edits.py
+index b10da92..0f7d9f4 100644
+--- a/lmcache/integration/vllm/kv_cache_group_edits.py
++++ b/lmcache/integration/vllm/kv_cache_group_edits.py
+@@ -449,6 +449,10 @@ class _SubpagedAttentionViewEdit(KVCacheGroupEdit):
+         num_heads, head_size = _synthetic_attention_shape(
+             elems_per_page, logical_block_size
+         )
++        # Match the detector's HND/BLHNC interpretation. These are opaque
++        # pages with one synthetic head, so changing metadata keeps byte order.
++        if _layout_hints.get("kv_layout") in ("HND", "BLHNC"):
++            return ordered.view(num_blocks, 2, num_heads, logical_block_size, head_size)
+         return ordered.view(num_blocks, 2, logical_block_size, num_heads, head_size)
+ 
+ 
+diff --git a/tests/v1/test_vllm_kv_cache_group_edits.py b/tests/v1/test_vllm_kv_cache_group_edits.py
+index 22af66a..8f77c69 100644
+--- a/tests/v1/test_vllm_kv_cache_group_edits.py
++++ b/tests/v1/test_vllm_kv_cache_group_edits.py
+@@ -492,3 +492,19 @@ def test_flash_attention_hybrid_needs_no_attention_edit(edits):
+     # Passed through untouched, and already at block-id granularity.
+     assert edited["attn.0"] is kv_caches["attn.0"]
+     assert edited["attn.0"].shape[2] == LOGICAL_BLOCK_SIZE
++
++
++@pytest.mark.parametrize('hint', ['NHD','HND','BLNHC','BLHNC'])
++def test_subpaged_attention_preserves_hint_geometry(edits, hint):
++    from lmcache.v1.multiprocess.transfer_context.base import compute_kv_layout, gather_paged_kv_to_cpu, scatter_cpu_to_paged_kv
++    cache=_fused_kv_cache()
++    viewed=edits._SubpagedAttentionViewEdit().apply(_attention_spec(),cache,{'kv_layout':hint})
++    assert viewed.data_ptr()==cache.data_ptr()
++    assert torch.equal(viewed.reshape(-1),cache.reshape(-1))
++    block,*_=compute_kv_layout({'a':viewed},layout_hints={'kv_layout':hint})
++    assert block==LOGICAL_BLOCK_SIZE
++    chunks=gather_paged_kv_to_cpu({'a':viewed},[1,2],1,layout_hints={'kv_layout':hint})
++    dest=torch.zeros_like(viewed)
++    scatter_cpu_to_paged_kv({'a':dest},[1,2],chunks,1,layout_hints={'kv_layout':hint})
++    assert torch.equal(dest[1:3],viewed[1:3])
++    assert not dest[0].any() and not dest[3].any()

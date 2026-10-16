@@ -1,0 +1,14 @@
+ExecStart={ path=/opt/lmcache/.venv/bin/lmcache ; argv[]=/opt/lmcache/.venv/bin/lmcache server --transport zmq --host 0.0.0.0 --port 5556 --l1-size-gb 40 --eviction-policy LRU --supported-transfer-mode engine_driven --chunk-size 800 --separate-object-groups --isolated-ipc --http-host 127.0.0.1 --http-port 8081 --disable-metrics --no-run-script-api-enabled ; ignore_errors=no ; start_time=[Fri 2026-10-16 01:34:37 UTC] ; stop_time=[n/a] ; pid=3755 ; code=(null) ; status=0/0 }
+MemoryCurrent=43521769472
+Id=lmcache-mtp-server.service
+ActiveState=active
+UnitFileState=enabled
+
+ExecStart={ path=/opt/lmcache/.venv/bin/lmcache ; argv[]=/opt/lmcache/.venv/bin/lmcache server --transport zmq --host 0.0.0.0 --port 5555 --l1-size-gb 40 --eviction-policy LRU --supported-transfer-mode engine_driven --chunk-size 784 --separate-object-groups --isolated-ipc --http-host 127.0.0.1 --http-port 8080 --disable-metrics --no-run-script-api-enabled ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }
+MemoryCurrent=[not set]
+Id=lmcache-server.service
+ActiveState=inactive
+UnitFileState=disabled
+               total        used        free      shared  buff/cache   available
+Mem:     68719476736 43582790656 25072881664      131072    63943680 25136686080
+Swap:              0           0           0

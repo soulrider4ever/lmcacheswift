@@ -1,0 +1,26 @@
+--- /tmp/lmcache-mi210-20261015/kv_cache_utils.py	2026-10-15 18:10:57.538181200 -0400
++++ /tmp/lmcache-mi210-mtp-20261015/kv_cache_utils.qwen_mtp.py	2026-10-15 19:18:04.578877181 -0400
+@@ -2118,6 +2118,23 @@
+         ):
+             group.is_eagle_group = True
+ 
++    # Qwen3.5 MTP registers its one draft full-attention layer under
++    # mtp.layers.*. The target uses model.layers.* (including Mamba), and
++    # the draft spec otherwise looks identical to target attention. Match
++    # the registered layer names, not the last group or all groups.
++    model_config = vllm_config.model_config
++    if (spec_config.method == "mtp" and model_config is not None
++            and model_config.hf_config.model_type == "qwen3_5"):
++        draft_layers = {
++            name for name in kv_cache_spec
++            if name.startswith("mtp.layers.")
++        }
++        if draft_layers:
++            for group in kv_cache_groups:
++                if draft_layers.intersection(group.layer_names):
++                    group.is_eagle_group = True
++            return
++
+     if not use_deepseek_v4_fallback:
+         return
+     last_layer = next(reversed(kv_cache_spec))

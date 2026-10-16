@@ -1,0 +1,8 @@
+{
+  "hfId": "rovangju/Swift-Qwen3.8-27b-W8A8",
+  "revision": "bf37ab853e8dafbd531dee9cb6d0fbe813b69873",
+  "pinnedConfigSha256": "641acbaf484679c6973be457a68b4e28a660c2bcf23b341139122fe42dde0614",
+  "localConfigSha256": "641acbaf484679c6973be457a68b4e28a660c2bcf23b341139122fe42dde0614",
+  "matches": true,
+  "note": "Config identity check plus retained model provenance; not a fresh hash of all weight shards."
+}

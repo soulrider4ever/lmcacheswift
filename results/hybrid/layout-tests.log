@@ -1,0 +1,8 @@
+.......................                                                  [100%]
+=============================== warnings summary ===============================
+test_vllm_kv_cache_group_edits_local.py: 57 warnings
+  /opt/lmcache/.venv/lib/python3.12/site-packages/opentelemetry/sdk/_logs/_internal/__init__.py:531: DeprecationWarning: `LoggingHandler` in `opentelemetry-sdk` is deprecated. Use the handler from `opentelemetry-instrumentation-logging` instead.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+23 passed, 57 warnings in 3.61s

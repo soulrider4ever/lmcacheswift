@@ -1,0 +1,205 @@
+{
+  "date": "2026-10-15",
+  "endpoint": "http://192.168.1.106:8092/v1",
+  "model": "qwen38-swift-w8a8",
+  "first_pass": {
+    "1": {
+      "prefill_median_tok_s": 2002.41147390083,
+      "prefill_range_tok_s": [
+        1997.0383272660704,
+        2002.6505706759065
+      ],
+      "decode_median_tok_s": 47.767189248272636,
+      "decode_range_tok_s": [
+        45.97367430766299,
+        48.08510970964519
+      ]
+    },
+    "2": {
+      "prefill_median_tok_s": 1997.416767623865,
+      "prefill_range_tok_s": [
+        1987.1692576943472,
+        1997.6176308965494
+      ],
+      "decode_median_tok_s": 45.52129108804306,
+      "decode_range_tok_s": [
+        43.70320725953525,
+        47.58997012049337
+      ]
+    },
+    "3": {
+      "prefill_median_tok_s": 1987.506723757237,
+      "prefill_range_tok_s": [
+        1984.5951538211664,
+        1988.8145041466855
+      ],
+      "decode_median_tok_s": 55.06313072113541,
+      "decode_range_tok_s": [
+        51.168604908974736,
+        61.97737258210023
+      ]
+    },
+    "4": {
+      "prefill_median_tok_s": 1980.7031967317469,
+      "prefill_range_tok_s": [
+        1978.9263102218679,
+        1981.610478633078
+      ],
+      "decode_median_tok_s": 36.02069492164586,
+      "decode_range_tok_s": [
+        35.722506540369935,
+        36.425836029559655
+      ]
+    },
+    "5": {
+      "prefill_median_tok_s": 1965.1491310495146,
+      "prefill_range_tok_s": [
+        1960.9474949986607,
+        1968.3685952376493
+      ],
+      "decode_median_tok_s": 52.713873811431874,
+      "decode_range_tok_s": [
+        52.671711543243994,
+        54.47484886538422
+      ]
+    },
+    "6": {
+      "prefill_median_tok_s": 1962.9197718198677,
+      "prefill_range_tok_s": [
+        1962.500394676946,
+        1965.4257097507693
+      ],
+      "decode_median_tok_s": 48.3235200376248,
+      "decode_range_tok_s": [
+        48.258254264337836,
+        49.97815714450794
+      ]
+    },
+    "7": {
+      "prefill_median_tok_s": 1953.6769025843066,
+      "prefill_range_tok_s": [
+        1953.1060549858714,
+        1957.4778000789718
+      ],
+      "decode_median_tok_s": 44.383435097613706,
+      "decode_range_tok_s": [
+        43.433335376614124,
+        52.59961858012173
+      ]
+    },
+    "8": {
+      "prefill_median_tok_s": 1952.9558258077413,
+      "prefill_range_tok_s": [
+        1946.6748604731458,
+        1955.8890812411582
+      ],
+      "decode_median_tok_s": 43.66386964659494,
+      "decode_range_tok_s": [
+        41.83524249785433,
+        44.174804718736745
+      ]
+    }
+  },
+  "late_repeats": {
+    "1": {
+      "prefill_median_tok_s": 1991.7607557217661,
+      "prefill_range_tok_s": [
+        1987.4950084598788,
+        1995.7647454364155
+      ],
+      "decode_median_tok_s": 44.90795603430931,
+      "decode_range_tok_s": [
+        43.18214558417676,
+        47.49595654641452
+      ]
+    },
+    "2": {
+      "prefill_median_tok_s": 1990.814883918441,
+      "prefill_range_tok_s": [
+        1987.4222278310372,
+        1992.388284999455
+      ],
+      "decode_median_tok_s": 45.51086042518712,
+      "decode_range_tok_s": [
+        43.71973192874449,
+        47.6524504887815
+      ]
+    },
+    "3": {
+      "prefill_median_tok_s": 1976.904874191383,
+      "prefill_range_tok_s": [
+        1970.718040587829,
+        1979.0108605966277
+      ],
+      "decode_median_tok_s": 55.08038287736507,
+      "decode_range_tok_s": [
+        51.176860801969,
+        59.72215102535208
+      ]
+    },
+    "5": {
+      "prefill_median_tok_s": 1957.6452721932828,
+      "prefill_range_tok_s": [
+        1953.1939743458568,
+        1961.7915949526516
+      ],
+      "decode_median_tok_s": 52.87003473889345,
+      "decode_range_tok_s": [
+        52.82501700285272,
+        54.58510385099738
+      ]
+    }
+  },
+  "pooled_repeats": {
+    "1": {
+      "prefill_median_tok_s": 1996.401536351243,
+      "prefill_range_tok_s": [
+        1987.4950084598788,
+        2002.6505706759065
+      ],
+      "decode_median_tok_s": 46.734815427038754,
+      "decode_range_tok_s": [
+        43.18214558417676,
+        48.08510970964519
+      ]
+    },
+    "2": {
+      "prefill_median_tok_s": 1991.6015844589479,
+      "prefill_range_tok_s": [
+        1987.1692576943472,
+        1997.6176308965494
+      ],
+      "decode_median_tok_s": 45.51607575661509,
+      "decode_range_tok_s": [
+        43.70320725953525,
+        47.6524504887815
+      ]
+    },
+    "3": {
+      "prefill_median_tok_s": 1981.803007208897,
+      "prefill_range_tok_s": [
+        1970.718040587829,
+        1988.8145041466855
+      ],
+      "decode_median_tok_s": 55.07175679925024,
+      "decode_range_tok_s": [
+        51.168604908974736,
+        61.97737258210023
+      ]
+    },
+    "5": {
+      "prefill_median_tok_s": 1961.369544975656,
+      "prefill_range_tok_s": [
+        1953.1939743458568,
+        1968.3685952376493
+      ],
+      "decode_median_tok_s": 52.847525870873085,
+      "decode_range_tok_s": [
+        52.671711543243994,
+        54.58510385099738
+      ]
+    }
+  },
+  "selected_depth": 3,
+  "selected_reason": "highest repeatable decode throughput with less than 1% prefill tradeoff versus MTP=1"
+}

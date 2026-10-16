@@ -1,0 +1,42 @@
+--- /tmp/lmcache-mi210-20261015/kv_cache_coordinator.py	2026-10-15 19:12:55.740716552 -0400
++++ benchmarks/mi210-lmcache-hybrid-20261015/mtp-aiter/kv_cache_coordinator.qwen_mtp.py	2026-10-15 19:51:17.282939203 -0400
+@@ -553,9 +553,9 @@
+     """KV cache groups that share one spec, batched together for a single
+     cache-hit lookup.
+ 
+-    ``use_eagle`` is True iff any member group is an EAGLE/MTP group. Members
+-    sharing a spec are cached and looked up jointly, so the EAGLE last-block drop
+-    is necessarily decided for the whole spec group.
++    ``use_eagle`` is shared by every member. Equal target and draft KV specs
++    still need different replay boundaries: draft groups drop the last MTP
++    block, while target groups must not inherit that drop.
+     """
+ 
+     spec: KVCacheSpec
+@@ -683,8 +683,9 @@
+ 
+     def verify_and_split_kv_cache_groups(self) -> None:
+         """
+-        Groups KV cache groups by their spec type for efficient batch processing
+-        during cache hit lookup.
++        Batch compatible KV cache groups for prefix lookup. Draft and target
++        groups with equal specs must remain separate: only draft groups drop
++        an EAGLE/MTP block at the replay boundary.
+         """
+         self.attention_groups: list[SpecGroup] = []
+         for i, g in enumerate(self.kv_cache_config.kv_cache_groups):
+@@ -701,13 +702,11 @@
+ 
+             # Try to find an existing group with the same spec
+             for idx, group in enumerate(self.attention_groups):
+-                if group.spec == spec:
++                if group.spec == spec and group.use_eagle == use_eagle:
+                     assert manager_cls is group.manager_cls, (
+                         "Expected same manager class for identical KV cache specs."
+                     )
+                     group.group_ids.append(i)
+-                    if use_eagle and not group.use_eagle:
+-                        self.attention_groups[idx] = group._replace(use_eagle=True)
+                     break
+             else:
+                 self.attention_groups.append(

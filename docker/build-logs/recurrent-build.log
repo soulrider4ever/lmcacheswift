@@ -1,0 +1,39 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 601B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/local/vllm-mi210:lmcache-hybrid-3360d957
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 94.15kB done
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/local/vllm-mi210:lmcache-hybrid-3360d957@sha256:f4de710b501e8e4d955413c7e1ccc75cf0aea8bcd22b7910cf7e37e082222ecf
+#5 resolve docker.io/local/vllm-mi210:lmcache-hybrid-3360d957@sha256:f4de710b501e8e4d955413c7e1ccc75cf0aea8bcd22b7910cf7e37e082222ecf 0.0s done
+#5 DONE 1.8s
+
+#6 [2/4] COPY lmcache/v1/multiprocess/custom_types.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/custom_types.py
+#6 DONE 0.0s
+
+#7 [3/4] COPY lmcache/v1/multiprocess/transfer_context/worker_transfer.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/transfer_context/worker_transfer.py
+#7 DONE 0.0s
+
+#8 [4/4] COPY lmcache/v1/multiprocess/modules/engine_driven_transfer.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/modules/engine_driven_transfer.py
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers 0.1s done
+#9 exporting manifest sha256:43df8cceab86ae0a12bfd3446eb57021987e56fe6144d55fccc8185150a1d32e done
+#9 exporting config sha256:3350ffc456c25b17c882a2985b7dac13740e4e420fde500bebcadc66454f8aba 0.0s done
+#9 exporting attestation manifest sha256:f5e0c1422e5b3dbbc1735d1566ebac30bc7b0c3660cf54968c35e3285e47054c 0.0s done
+#9 exporting manifest list sha256:c03f660d012c6d9e32084e45c6276462793fd0559cd8ad44db5e2b1ca6f9bbcb done
+#9 naming to docker.io/local/vllm-mi210:lmcache-recurrent-20261015 done
+#9 unpacking to docker.io/local/vllm-mi210:lmcache-recurrent-20261015 0.1s done
+#9 DONE 0.4s

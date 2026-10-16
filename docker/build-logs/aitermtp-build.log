@@ -1,0 +1,39 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.aiter-mtp
+#1 transferring dockerfile: 478B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/local/vllm-mi210:lmcache-layout-20261015
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/local/vllm-mi210:lmcache-layout-20261015@sha256:55b9bab38540c4264340aa50f67a961a3b3a02ef411a17020eed6e9fe34598ff
+#5 ...
+
+#4 [internal] load build context
+#4 transferring context: 4.12kB done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/local/vllm-mi210:lmcache-layout-20261015@sha256:55b9bab38540c4264340aa50f67a961a3b3a02ef411a17020eed6e9fe34598ff
+#5 resolve docker.io/local/vllm-mi210:lmcache-layout-20261015@sha256:55b9bab38540c4264340aa50f67a961a3b3a02ef411a17020eed6e9fe34598ff 0.0s done
+#5 DONE 1.9s
+
+#6 [2/2] COPY gfx90a-fallback/DEFAULT.json /opt/python/lib/python3.14/site-packages/aiter/ops/triton/configs/gfx90a/triton/attention/unified_attention/DEFAULT.json
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:ee57f928b15b51a2dd4f57fc00a5af9a44a2c144a8ceddacbd3831ff7470afe2 done
+#7 exporting config sha256:49f050534a12ed1b054b8b049967f7933d1da8da9c3706a139787202f33a5446 done
+#7 exporting attestation manifest sha256:79ecca7088e34a2f9b682c0e27d18971da8f5cb07c1988c8de2b802aa5d68ff3 0.0s done
+#7 exporting manifest list sha256:6e6c2f221e7a9b9875cb1b9f80c2a0e7950203fea2c3ab5ee8c03c76b2e399b0 done
+#7 naming to docker.io/local/vllm-mi210:lmcache-aiter-mtp-gfx90a-20261015 done
+#7 unpacking to docker.io/local/vllm-mi210:lmcache-aiter-mtp-gfx90a-20261015 0.1s done
+#7 DONE 0.3s

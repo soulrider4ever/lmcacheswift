@@ -1,0 +1,59 @@
+### 1. Budget Calculation
+
+To determine how many batteries the club can buy and the remaining balance, we must first calculate the total cost of the required components and the shared spool.
+
+**Step 1: Calculate the cost of individual components per member.**
+Each member needs one motor driver and one microcontroller.
+*   Cost per member = Cost of Motor Driver + Cost of Microcontroller
+*   Cost per member = $18.50 + $23.75 = $42.25
+
+**Step 2: Calculate the total cost for all 7 members.**
+*   Total member cost = 7 members × $42.25/member
+*   Total member cost = $295.75
+
+**Step 3: Add the cost of the shared 3D-printer spool.**
+*   Total component cost = Total member cost + Spool cost
+*   Total component cost = $295.75 + $27.90 = $323.65
+
+**Step 4: Determine the remaining budget for batteries.**
+*   Remaining budget = Total Budget - Total component cost
+*   Remaining budget = $412.00 - $323.65 = $88.35
+
+**Step 5: Calculate the number of batteries that can be purchased.**
+The batteries cost $6.35 each. We divide the remaining budget by the price per battery and take the integer part (since they cannot buy a fraction of a battery).
+*   Number of batteries = $\lfloor 88.35 / 6.35 \rfloor$
+*   $88.35 / 6.35 \approx 13.913$
+*   Number of batteries = 13
+
+**Step 6: Calculate the final leftover money.**
+*   Cost of 13 batteries = 13 × $6.35 = $82.55
+*   Leftover money = Remaining budget - Cost of batteries
+*   Leftover money = $88.35 - $82.55 = $5.80
+
+**Conclusion:**
+They can buy **13** batteries in total, and they will have **$5.80** left over.
+
+***
+
+### 2. Wheel Size, Torque, and Speed
+
+**Who is right?**
+Neither Alice nor Ben is entirely right in isolation; they are both describing one side of a fundamental mechanical tradeoff. However, **Ben is closer to the standard definition of "speed"**, while **Alice is confusing torque at the wheel with torque at the motor**.
+
+**The Tradeoff:**
+The core tradeoff is between **linear speed** and **rotational force (traction/torque at the ground)**.
+*   **Larger Wheels:** For a given motor RPM (revolutions per minute), a larger wheel covers more distance per rotation. Therefore, larger wheels increase the robot's top speed. However, because the wheel has a larger radius, the force required to turn it (torque) increases for the same amount of acceleration. This makes it harder for the motor to accelerate the robot from a standstill or climb steep hills.
+*   **Smaller Wheels:** Smaller wheels result in lower top speed for the same motor RPM. However, they require less torque to accelerate, making the robot feel "snappier" and better at climbing or accelerating quickly.
+
+**The Role of Gear Ratio:**
+Gear ratio is the variable that decouples wheel size from the final performance.
+*   **High Gear Ratio (e.g., 10:1):** The motor spins 10 times for every 1 turn of the wheel. This multiplies the motor's torque by 10 (making it easier to turn the wheel) but divides the speed by 10.
+*   **Low Gear Ratio (e.g., 1:1):** The motor and wheel spin at the same speed. This provides maximum speed but minimum torque multiplication.
+
+**How Gear Ratio Changes the Answer:**
+If Alice wants high torque at the ground, she doesn't necessarily need a larger wheel; she needs a **higher gear ratio**. A small wheel with a high gear ratio can provide high torque and low speed. A large wheel with a low gear ratio can provide high speed and low torque.
+*   **Correct Engineering View:** Wheel size determines the *distance per rotation*. Gear ratio determines the *tradeoff between speed and torque* available from the motor. You can achieve high torque with small wheels (high gear ratio) or high speed with large wheels (low gear ratio). The "right" choice depends on whether the robot needs to be fast (Ben) or strong (Alice), and gear ratio is the primary tool to adjust that balance, not just wheel diameter.
+
+***
+
+### 

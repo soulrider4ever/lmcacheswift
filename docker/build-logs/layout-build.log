@@ -1,0 +1,33 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 284B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/local/vllm-mi210:lmcache-hybrid-3360d957
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 29.68kB done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/local/vllm-mi210:lmcache-hybrid-3360d957@sha256:f4de710b501e8e4d955413c7e1ccc75cf0aea8bcd22b7910cf7e37e082222ecf
+#5 resolve docker.io/local/vllm-mi210:lmcache-hybrid-3360d957@sha256:f4de710b501e8e4d955413c7e1ccc75cf0aea8bcd22b7910cf7e37e082222ecf 0.0s done
+#5 CACHED
+
+#6 [2/2] COPY lmcache/integration/vllm/kv_cache_group_edits.py /opt/python/lib/python3.14/site-packages/lmcache/integration/vllm/kv_cache_group_edits.py
+#6 DONE 0.0s
+
+#7 exporting to image
+#7 exporting layers 0.1s done
+#7 exporting manifest sha256:cd86a4083f7cfce386573aa5d139683e732dcd526478464fb3151792332c42df done
+#7 exporting config sha256:00f6bebeb13f8757083991d9e654d1fbc7786a8b6fd6a7f0c6c9a0a3318e9ffa done
+#7 exporting attestation manifest sha256:d06cf425a3c2476fb01777033428d9f25efca9307e39ccf590b5f12a80780b9d 0.0s done
+#7 exporting manifest list sha256:55b9bab38540c4264340aa50f67a961a3b3a02ef411a17020eed6e9fe34598ff done
+#7 naming to docker.io/local/vllm-mi210:lmcache-layout-20261015 done
+#7 unpacking to docker.io/local/vllm-mi210:lmcache-layout-20261015 0.1s done
+#7 DONE 0.4s

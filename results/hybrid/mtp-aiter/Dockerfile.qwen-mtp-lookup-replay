@@ -1,0 +1,3 @@
+FROM local/vllm-mi210:lmcache-aiter-mtp-qwen-replay-retention-20261015
+COPY lmcache_mp_connector.lookup_replay.py /opt/python/lib/python3.14/site-packages/lmcache/integration/vllm/lmcache_mp_connector.py
+LABEL mtp.experimental_lookup_replay="20261016"

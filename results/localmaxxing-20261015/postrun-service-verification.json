@@ -1,0 +1,25 @@
+{
+  "container": "qwen38-swift-w8a8-lmcache-aiter-mtp3-replay-cap-v2-20261015",
+  "image": "sha256:275f7b6b258fa87a2e22cf796ea9548bab78953ebe87ce45ff65eee1cd15bdef",
+  "state": {
+    "Status": "running",
+    "Running": true,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 134242,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-16T01:15:29.291770496Z",
+    "FinishedAt": "2026-10-16T01:12:40.75498912Z"
+  },
+  "restartCount": 0,
+  "restartPolicy": {
+    "Name": "unless-stopped",
+    "MaximumRetryCount": 0
+  },
+  "healthHttp": 200,
+  "samePidAndStart": true,
+  "checkedAt": "2026-10-16T01:44:29.442761+00:00"
+}

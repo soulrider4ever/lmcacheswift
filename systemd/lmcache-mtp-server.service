@@ -1,0 +1,18 @@
+[Unit]
+Description=MI210 MTP hybrid LMCache server (800-token chunks)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=lmcache
+Group=lmcache
+WorkingDirectory=/var/lib/lmcache
+Environment=LMCACHE_TRACK_USAGE=false
+Environment=LMCACHE_DISABLE_BANNER=1
+ExecStart=/opt/lmcache/.venv/bin/lmcache server --transport zmq --host 0.0.0.0 --port 5556 --l1-size-gb 40 --eviction-policy LRU --supported-transfer-mode engine_driven --chunk-size 800 --separate-object-groups --isolated-ipc --http-host 127.0.0.1 --http-port 8081 --disable-metrics --no-run-script-api-enabled
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

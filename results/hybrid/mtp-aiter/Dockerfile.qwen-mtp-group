@@ -1,0 +1,3 @@
+FROM local/vllm-mi210:lmcache-aiter-mtp-gfx90a-20261015
+COPY kv_cache_utils.qwen_mtp.py /opt/python/lib/python3.14/site-packages/vllm/v1/core/kv_cache_utils.py
+LABEL mtp.experimental_group_annotation="qwen3.5-mtp-layer-only-20261015"
