@@ -1,3 +1,8 @@
+> **2026-10-16 repair:** After rebuilding the historical replay-cap-v2 base below, apply
+> `docker/Dockerfile.bounded-transfer`. The current live image/container and
+> validation are in [bounded-transfer-fix-20261016.md](bounded-transfer-fix-20261016.md).
+> The historical benchmarks below predate this repair.
+
 # Reimplementation Guide — MI210 + Swift-Qwen3.8 MTP3 + remote LMCache
 
 Goal: rebuild the exact working stack on fresh hosts. Everything needed is in

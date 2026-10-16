@@ -1,6 +1,6 @@
 {
-  "container": "qwen38-swift-w8a8-lmcache-aiter-mtp3-replay-cap-v2-20261015",
-  "image": "sha256:275f7b6b258fa87a2e22cf796ea9548bab78953ebe87ce45ff65eee1cd15bdef",
+  "container": "qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016",
+  "image": "sha256:76acbdb4186b2311c65f29287f1e8a6d60e59f086cb181bcffaf184092cf280c",
   "cmd": [
     "vllm",
     "serve",

@@ -1,0 +1,57 @@
+--- a/vllm/v1/core/sched/scheduler.py
++++ b/vllm/v1/core/sched/scheduler.py
+@@ -2994,17 +2994,23 @@
+         # KV Connector:: update recv and send status from last step.
+         for req_id in kv_connector_output.finished_recving or ():
+             logger.debug("Finished recving KV transfer for request %s", req_id)
+-            assert req_id in self.requests
+-            req = self.requests[req_id]
++            req = self.requests.get(req_id)
++            if req is None:
++                logger.debug("Ignoring stale KV receive completion for %s", req_id)
++                continue
+             if req.status == RequestStatus.WAITING_FOR_REMOTE_KVS:
+                 self.finished_recving_kv_req_ids.add(req_id)
++            elif RequestStatus.is_finished(req.status):
++                self._free_blocks(req)
+             else:
+-                assert RequestStatus.is_finished(req.status)
+-                self._free_blocks(self.requests[req_id])
++                logger.debug("Ignoring duplicate KV receive completion for %s", req_id)
+         for req_id in kv_connector_output.finished_sending or ():
+             logger.debug("Finished sending KV transfer for request %s", req_id)
+-            assert req_id in self.requests
+-            self._free_blocks(self.requests[req_id])
++            req = self.requests.get(req_id)
++            if req is not None and RequestStatus.is_finished(req.status):
++                self._free_blocks(req)
++            else:
++                logger.debug("Ignoring stale KV send completion for %s", req_id)
+ 
+     def _update_requests_with_invalid_blocks(
+         self,
+@@ -3048,8 +3054,22 @@
+             is_affected = False
+             marked_invalid_block = False
+             req_id = request.request_id
+-            # TODO (davidb): add support for hybrid memory allocator
+-            (req_block_ids,) = self.kv_cache_manager.get_block_ids(req_id)
++            grouped_block_ids = self.kv_cache_manager.get_block_ids(req_id)
++            if len(grouped_block_ids) > 1:
++                # Recurrent-state pages cannot be truncated using attention's
++                # token/block geometry. Any failed hybrid group invalidates the
++                # full request; never cache a partially loaded Mamba state.
++                all_blocks = {b for group in grouped_block_ids for b in group}
++                if all_blocks & invalid_block_ids:
++                    total_affected_tokens += max(
++                        0, request.num_computed_tokens - num_scheduled_tokens.get(req_id, 0)
++                    )
++                    request.num_computed_tokens = 0
++                    affected_req_ids.add(req_id)
++                    if evict_blocks:
++                        blocks_to_evict.update(all_blocks)
++                continue
++            (req_block_ids,) = grouped_block_ids
+             # We iterate only over blocks that may contain externally computed
+             # tokens
+             req_num_computed_tokens = (

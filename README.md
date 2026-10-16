@@ -6,7 +6,11 @@ ROCM_AITER_FA + a remote CPU LMCache KV store**, including every local patch,
 overlay, launch profile, service unit, validation harness, and measured result
 from 2026-10-15/16.
 
-Live at backup time (2026-10-16):
+Current deployment (2026-10-16; bounded-transfer repair):
+
+See [repair details](docs/bounded-transfer-fix-20261016.md). Each pickle RPC is
+bounded to 512 MiB; hybrid failure cleanup and late completions are hardened.
+Historical benchmark figures below predate this repair.
 
 | Piece | Value |
 |---|---|
@@ -15,8 +19,8 @@ Live at backup time (2026-10-16):
 | Model | `rovangju/Swift-Qwen3.8-27b-W8A8` @ `bf37ab853e8dafbd531dee9cb6d0fbe813b69873` |
 | vLLM | `0.1.dev1+g12dadcb41` (davetha/vllm MI210 fork, SHA `12dadcb4134ab41cf99b60a22e1222b7479e1a58`) |
 | Base image | `local/vllm-mi210:lmcache-hybrid-3360d957` (LMCache engine-driven hybrid @ `3360d9570b29620e18ef264a411d2fbfee5f3915`) |
-| Live image | `local/vllm-mi210:lmcache-aiter-mtp-qwen-replay-cap-v2-20261015` = `sha256:275f7b6b258fa87a2e22cf796ea9548bab78953ebe87ce45ff65eee1cd15bdef` |
-| Live container | `qwen38-swift-w8a8-lmcache-aiter-mtp3-replay-cap-v2-20261015`, `restart=unless-stopped` |
+| Live image | `local/vllm-mi210:lmcache-mtp3-bounded-transfer-v1-20261016` = `sha256:76acbdb4186b2311c65f29287f1e8a6d60e59f086cb181bcffaf184092cf280c` |
+| Live container | `qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016`, `restart=unless-stopped` |
 | Spec decode | MTP, `num_speculative_tokens=3` |
 | Attention | `ROCM_AITER_FA` (with one unvalidated gfx942 Triton config on gfx90a) |
 | Cache host (CT125) | `192.168.1.107`, LMCache `0.5.7.dev22` @ `3e11e10812b448142c6cdb177a3058652bd826fa` |

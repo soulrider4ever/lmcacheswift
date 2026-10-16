@@ -1,0 +1,20 @@
+test_hybrid_any_group_failure_full_recompute (__main__.SchedulerTests.test_hybrid_any_group_failure_full_recompute) ... ok
+test_hybrid_async_no_evict (__main__.SchedulerTests.test_hybrid_async_no_evict) ... ok
+test_hybrid_unaffected (__main__.SchedulerTests.test_hybrid_unaffected) ... ok
+test_single_group_preserves_valid_prefix (__main__.SchedulerTests.test_single_group_preserves_valid_prefix) ... ok
+test_stale_duplicate_and_finished_completions (__main__.SchedulerTests.test_stale_duplicate_and_finished_completions) ... ok
+test_bad_alignment (__main__.TransferTests.test_bad_alignment) ... ok
+test_hybrid_store_slices_every_group (__main__.TransferTests.test_hybrid_store_slices_every_group) ... ok
+test_large_hybrid_retrieve_batched_and_ordered (__main__.TransferTests.test_large_hybrid_retrieve_batched_and_ordered) ... ok
+test_miss_after_partial_batch_is_all_or_nothing (__main__.TransferTests.test_miss_after_partial_batch_is_all_or_nothing) ... ok
+test_offset_range (__main__.TransferTests.test_offset_range) ... ok
+test_oversized_single_chunk (__main__.TransferTests.test_oversized_single_chunk) ... ok
+test_real_tensor_roundtrip_and_msgpack (__main__.TransferTests.test_real_tensor_roundtrip_and_msgpack) ... ok
+test_single_group_retrieve (__main__.TransferTests.test_single_group_retrieve) ... ok
+test_single_store (__main__.TransferTests.test_single_store) ... ok
+test_wrong_chunk_count (__main__.TransferTests.test_wrong_chunk_count) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.033s
+
+OK

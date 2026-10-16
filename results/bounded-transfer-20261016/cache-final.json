@@ -1,0 +1,11 @@
+{
+  "healthy": true,
+  "chunk_size": 800,
+  "active_sessions": 0,
+  "capacity_bytes": 42949672960,
+  "used_bytes": 30595481600,
+  "read_locks": 0,
+  "write_locks": 0,
+  "service": "MainPID=3755\nNRestarts=0\nActiveState=active\n",
+  "fallback": "disabled"
+}

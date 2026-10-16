@@ -129,3 +129,10 @@ Qwen3.5-MTP group detection + spec-group split). 4–6 are entangled with the
 in-image LMCache `3360d957` engine-driven branch; the `lookup_replay_tokens`
 knob is designed to be upstream-shaped (opt-in, validated, default-off).
 None have been submitted as of backup time.
+
+
+## 2026-10-16 bounded transfer and scheduler failure cleanup
+
+See [incident, implementation and validation](bounded-transfer-fix-20261016.md).
+Four new authoritative files under `overlay/live/` apply atop the historical
+replay-cap-v2 image; no cache-server code change or cache restart is required.

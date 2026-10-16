@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Launches the live MTP3+LMCache vLLM profile on CT115 (192.168.1.106).
-# Generated from docker inspect of qwen38-swift-w8a8-lmcache-aiter-mtp3-replay-cap-v2-20261015 on 2026-10-16.
+# Generated from docker inspect of qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016 on 2026-10-16.
 # Non-secret fields only (no raw inspect JSON is stored in this repo).
 # Normally you never need this: the live container is named with
 # restart=unless-stopped. Use it only after recreating from scratch.
 set -euo pipefail
-IMAGE="${IMAGE:-local/vllm-mi210:lmcache-aiter-mtp-qwen-replay-cap-v2-20261015}"
-NAME="qwen38-swift-w8a8-lmcache-aiter-mtp3-replay-cap-v2-20261015"
+IMAGE="${IMAGE:-local/vllm-mi210:lmcache-mtp3-bounded-transfer-v1-20261016}"
+NAME="qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016"
 
-docker run -d --name "$NAME" --image "$IMAGE" \
+docker run -d --name "$NAME" \
   --device /dev/kfd \
   --device /dev/dri \
   -v /home/ubuntu/mi210-inductor-cache:/cache/inductor \
@@ -36,13 +36,6 @@ docker run -d --name "$NAME" --image "$IMAGE" \
   -e 'UV_HTTP_TIMEOUT=500' \
   -e 'UV_INDEX_STRATEGY=unsafe-best-match' \
   -e 'UV_LINK_MODE=copy' \
-  # -e "SCCACHE_BUCKET=" \
-  # -e "SCCACHE_REGION=" \
-  # -e "SCCACHE_S3_NO_CREDENTIALS=" \
-  # -e "SCCACHE_IDLE_TIMEOUT=" \
-  # -e "SCCACHE_ENDPOINT=" \
-  # -e "SCCACHE_S3_KEY_PREFIX=" \
-  # -e "SCCACHE_S3_USE_SSL=" \
   -e 'PIP_EXTRA_INDEX_URL=https://stable.repo.amd.com/rocm/whl-next' \
   -e 'SITE_PACKAGES=/opt/python/lib/python3.14/site-packages' \
   -e 'ROCM_PATH=/opt/python/lib/python3.14/site-packages/_rocm_sdk_devel' \
@@ -68,10 +61,14 @@ docker run -d --name "$NAME" --image "$IMAGE" \
   -e 'LMCACHE_DISABLE_BANNER=1' \
   -e 'VLLM_NO_USAGE_STATS=1' \
   -e 'DO_NOT_TRACK=1' \
+  --group-add video \
+  --security-opt seccomp=unconfined \
+  --security-opt label=disable \
   --ipc host \
   --shm-size 17179869184 \
   --network bridge -p 8092:8092 \
   --restart unless-stopped \
+  "$IMAGE" \
   vllm \
   serve \
   /models/swift-qwen38 \

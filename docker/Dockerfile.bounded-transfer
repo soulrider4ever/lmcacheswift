@@ -1,0 +1,6 @@
+FROM local/vllm-mi210:lmcache-aiter-mtp-qwen-replay-cap-v2-20261015
+COPY overlay/live/transfer_context/base.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/transfer_context/base.py
+COPY overlay/live/transfer_context/pickle.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/transfer_context/pickle.py
+COPY overlay/live/transfer_context/worker_transfer.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/transfer_context/worker_transfer.py
+COPY overlay/live/scheduler.py /opt/python/lib/python3.14/site-packages/vllm/v1/core/sched/scheduler.py
+LABEL mi210.transfer_fix="bounded-pickle-hybrid-recovery-20261016"

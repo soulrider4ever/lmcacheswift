@@ -1,0 +1,45 @@
+{
+  "health": "HTTP 200",
+  "served_model": "qwen38-swift-w8a8",
+  "correctness": "exact count 1..30; stop",
+  "requests": [
+    {
+      "label": "warmup",
+      "wall_s": 1.295,
+      "completion_tokens": 110,
+      "wall_tok_s": 84.94,
+      "server_decode_tok_s": 98.57,
+      "mtp_accepted": 82,
+      "mtp_proposed": 84
+    },
+    {
+      "label": "measured-1",
+      "wall_s": 1.284,
+      "completion_tokens": 110,
+      "wall_tok_s": 85.68,
+      "server_decode_tok_s": 98.08,
+      "mtp_accepted": 82,
+      "mtp_proposed": 84
+    },
+    {
+      "label": "measured-2",
+      "wall_s": 1.277,
+      "completion_tokens": 110,
+      "wall_tok_s": 86.13,
+      "server_decode_tok_s": 98.43,
+      "mtp_accepted": 82,
+      "mtp_proposed": 84
+    },
+    {
+      "label": "measured-3",
+      "wall_s": 1.275,
+      "completion_tokens": 110,
+      "wall_tok_s": 86.28,
+      "server_decode_tok_s": 98.47,
+      "mtp_accepted": 82,
+      "mtp_proposed": 84
+    }
+  ],
+  "median_server_decode_tok_s": 98.43,
+  "median_wall_s": 1.277
+}
