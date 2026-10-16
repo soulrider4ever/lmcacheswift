@@ -208,3 +208,16 @@ the **diag** variant, which includes the coordinator-group split),
   size (16) or the connector raises; 800 satisfies it.
 - Do not bypass the ROCM_ATTN incompatible-KV-layout guard — that backend is a
   fallback only, and AITER FA is the live path.
+
+
+## Background hybrid commits (2026-10-16)
+The bounded-transfer image remains the parent/rollback. Build the latency layer
+from repository root with `docker build -f docker/Dockerfile.background-commit -t local/vllm-mi210:lmcache-mtp3-background-commit-v1-20261016 .`.
+Hybrid pickle stores previously bypassed the async executor. The live overlay now
+snapshots all groups synchronously before GPU blocks may change, then submits only
+CPU-owned tensors to the existing executor. Two outstanding <=512MiB snapshots
+are allowed; overload/oversize skips an optional cache write, never inference.
+This prioritizes response latency over complete remote-prefix retention. Retrieval
+and the prior bounded RPC/crash-recovery patches are unchanged. Large external
+loads still incur transport latency; this does not make network transfer free.
+The cache server remains 60GiB; no cache restart is required for this layer.

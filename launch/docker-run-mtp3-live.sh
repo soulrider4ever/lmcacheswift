@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Launches the live MTP3+LMCache vLLM profile on CT115 (192.168.1.106).
-# Generated from docker inspect of qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016 on 2026-10-16.
+# Generated from docker inspect of qwen38-swift-w8a8-lmcache-mtp3-background-v1-20261016 on 2026-10-16.
 # Non-secret fields only (no raw inspect JSON is stored in this repo).
 # Normally you never need this: the live container is named with
 # restart=unless-stopped. Use it only after recreating from scratch.
 set -euo pipefail
-IMAGE="${IMAGE:-local/vllm-mi210:lmcache-mtp3-bounded-transfer-v1-20261016}"
-NAME="qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016"
+IMAGE="${IMAGE:-local/vllm-mi210:lmcache-mtp3-background-commit-v1-20261016}"
+NAME="qwen38-swift-w8a8-lmcache-mtp3-background-v1-20261016"
 
 docker run -d --name "$NAME" \
   --device /dev/kfd \

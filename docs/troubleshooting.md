@@ -80,3 +80,14 @@ Symptoms → diagnosis → remedy, in the order we actually met them.
 - `run_*_canary.sh` / restart harnesses restore the **no-MTP** profile in their
   EXIT traps. They are experiment tools; never wire them to monitoring or run
   them casually against the live endpoint.
+
+
+### Latency-first hybrid writes (2026-10-16)
+The background-commit layer returns a false store receipt when its two-snapshot
+queue is saturated, an operation exceeds 512MiB, or shutdown has begun. The
+existing adapter logs these as generic store errors; they are optional cache
+write losses, not failed chat requests. A false receipt never publishes a
+successful cache event. Real snapshot/commit exceptions have an additional
+`Hybrid cache snapshot failed` / `Background hybrid cache commit failed` traceback.
+Skipped writes can leave gaps: do not claim full external-prefix retention from
+a successful local repeat. Check explicit external-token provenance.

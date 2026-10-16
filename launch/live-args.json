@@ -1,6 +1,6 @@
 {
-  "container": "qwen38-swift-w8a8-lmcache-mtp3-bounded-v1-20261016",
-  "image": "sha256:76acbdb4186b2311c65f29287f1e8a6d60e59f086cb181bcffaf184092cf280c",
+  "container": "qwen38-swift-w8a8-lmcache-mtp3-background-v1-20261016",
+  "image": "sha256:432b6062d86507848c5fe4d57c2b161f54e9dbe207a624587544d44c2f1f4cb3",
   "cmd": [
     "vllm",
     "serve",

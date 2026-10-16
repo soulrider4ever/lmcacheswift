@@ -1,0 +1,3 @@
+FROM local/vllm-mi210:lmcache-mtp3-bounded-transfer-v1-20261016
+COPY overlay/live/transfer_context/async_engine_driven.py /opt/python/lib/python3.14/site-packages/lmcache/v1/multiprocess/transfer_context/async_engine_driven.py
+LABEL mi210.latency_fix="bounded-background-hybrid-commit-20261016"

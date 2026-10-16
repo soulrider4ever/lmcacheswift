@@ -1,0 +1,52 @@
+{
+  "label": "cold",
+  "seconds": 19.397259032994043,
+  "result": {
+    "id": "chatcmpl-9853a07fe98c4203",
+    "object": "chat.completion",
+    "created": 1792161481,
+    "model": "qwen38-swift-w8a8",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "silver compass",
+          "refusal": null,
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "reasoning": null
+        },
+        "logprobs": null,
+        "finish_reason": "stop",
+        "stop_reason": null,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.1.dev1+g12dadcb41-0bab1c5d",
+    "usage": {
+      "prompt_tokens": 20046,
+      "total_tokens": 20049,
+      "completion_tokens": 3,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": {
+      "cached_token_stats": {
+        "num_vllm_cached_tokens": 0,
+        "num_lmcache_cached_tokens": 0,
+        "num_lmcache_extra_cached_tokens": 0
+      }
+    },
+    "ec_transfer_params": null,
+    "metrics": null
+  }
+}
