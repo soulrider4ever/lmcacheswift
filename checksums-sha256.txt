@@ -1,3 +1,4 @@
+2ba067c2963fce405dba656534e7610f4cb8e154ac20621a56c3264ab8204d02  ./.gitignore
 c9528fca1985d1ce07a7aae80c36e17388008949e8e208ea7b6523ce62ad1e39  ./README.md
 99e36e5581fa90d626e3e0789569662f367cb94ad2683f6ec43ccdf733a35d3d  ./docker/Dockerfile.aiter-mtp
 3bd40caf32180bd2aa3ae3d6f9d42dd4e3c4489733838c70509d65ebadd1e401  ./docker/Dockerfile.bounded-transfer
@@ -23,16 +24,12 @@ d609fd40325cfcfe9e09a3c567b68d552a0a28f8c1da4941ec5dbcf6cc8646ff  ./docs/validat
 962942b90febb9d32d8c3150431fb52b83babfb9b4fa2f881e5e566417f7e6eb  ./launch/live-args.json
 6b81bd3bfff7723722dc99d28bdc75a4f8bd507a200e897a97d8986cf57d9d2f  ./overlay/aiter/DEFAULT.gfx90a-from-gfx942.json
 6b81bd3bfff7723722dc99d28bdc75a4f8bd507a200e897a97d8986cf57d9d2f  ./overlay/live/DEFAULT.gfx90a-from-gfx942.json
-ff3a9fc5ecb9f6d74e076d1a3a242fe458c3f13d970dcdbc77ae11062cd92766  ./overlay/live/__pycache__/scheduler.cpython-312.pyc
 f1764178cf8e31dd0a974c5f95b5a2807e917d9ca168771526298b2c8c43a21a  ./overlay/live/kv_cache_coordinator.py
 6ac1e91f7201a3acfb4a6365bbe1feef12d7e0035dfc51571832df8b4130c159  ./overlay/live/kv_cache_group_edits.py
 71271ca62b31e623292f0888de44cda1faf0f30028dbe4fede0c4190f37d30fa  ./overlay/live/kv_cache_utils.py
 6337c4639244b729401769d3c20cc96adc27b550b9e67860b5bfac1aa7c0fcf4  ./overlay/live/lmcache_mp_connector.py
 933d904750aab1bd6d26ed0d49b6edf682c1bc74e12909743bb9d327f3b22009  ./overlay/live/scheduler.py
 84eeda8f6f1df47840a31ae5b0488a25e7263341e65439e858300ff2ef4c9e68  ./overlay/live/single_type_kv_cache_manager.py
-e13f9636fe40fdef0b1797eecef7b7d18a1e8f3badf9aa37da3db2c2c94e0410  ./overlay/live/transfer_context/__pycache__/base.cpython-312.pyc
-b0948294e265cf4fc8aa92da69c882a2e9f7da618fb61b25860278bf28b281b4  ./overlay/live/transfer_context/__pycache__/pickle.cpython-312.pyc
-a32bd9f9eb184f08bc8197efbad865ea1b3bc336c41084ba113315e709500478  ./overlay/live/transfer_context/__pycache__/worker_transfer.cpython-312.pyc
 3b08e65bbf835dc18a18599f9fa0e803fec40c20fe6541f5a0e60c2664ae0d8d  ./overlay/live/transfer_context/base.py
 27ce7aea2bdf10c8080e97b9a5fe1a4f12c279c3926c08844786b1f066390425  ./overlay/live/transfer_context/pickle.py
 32fa518de156e0bd1b69aa4194f47d833f76411e61bba3e8085baf896a5bce9f  ./overlay/live/transfer_context/worker_transfer.py
@@ -185,7 +182,6 @@ eecf0a7ee1c56ba51fd9d9b03b7d703dab3f69360e265fd9bd82d34b14cb1d92  ./results/loca
 b057bf2fea15e43d0219cca4b5c74142466ef57ca8183789eabfd8a80e4e2c43  ./results/localmaxxing-20261015/verified-receipt.json
 a4055431a42cf0714853cbaba9d388fd030807d2f83bf9e9d616be4a7fb493c3  ./results/mtp-depth-sweep/report.md
 9f11e46fb2f1bc0c2f5c9d909110bc803b9b864938902b90ea30e500488c67f7  ./results/mtp-depth-sweep/summary.json
-453a6aa4b71cc1d68b8d37245dbc41c38e18858401f934f3cd7f51d15199652c  ./scripts/__pycache__/test_transfer_fix.cpython-312.pyc
 be8278e2e0e88e42a7716feee9879933588ef3008c31c9d7acd8c502794fe413  ./scripts/bounded_transfer_long_canary.py
 fbcac23d035a5959c58fe2d290d3b41c3e70fd4149ed13beec572e48019829ae  ./scripts/canaries.py
 ee445808f1958896e46630da66bc2defd4173ae6453e201f046692fe360b8ca0  ./scripts/canaries_mtp.py
