@@ -50,7 +50,7 @@ docker build -f docker/Dockerfile.bounded-transfer \
 ```
 
 The Dockerfile applies the four exact source files to the retained replay-cap-v2
-image. `launch/docker-run-mtp3-live.sh` now selects this image and fixes the
+image. `launch/docker-run-mtp3-validated.sh` now selects this image and fixes the
 old generated launcher's invalid `--image` option/comment continuations;
 required security options and the video group are retained.
 

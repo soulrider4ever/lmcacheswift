@@ -2,6 +2,11 @@
 > `docker/Dockerfile.bounded-transfer`. The current live image/container and
 > validation are in [bounded-transfer-fix-20261016.md](bounded-transfer-fix-20261016.md).
 > The historical benchmarks below predate this repair.
+>
+> **Requested target profile:** MTP5 + `kv_role=kv_producer` is documented in
+> [mtp5-kv-producer-profile.md](mtp5-kv-producer-profile.md). This guide remains
+> the reimplementation procedure for the archived MTP3 + `kv_both` hybrid; the
+> combined MTP5/producer profile is not runtime-validated.
 
 # Reimplementation Guide — MI210 + Swift-Qwen3.8 MTP3 + remote LMCache
 
@@ -103,8 +108,8 @@ cache-service restart; there is no disk L2.
 
 ## 5. Launch the inference container
 
-Use `launch/docker-run-mtp3-live.sh` (generated from the live container;
-non-secret fields only). Key knobs, full argv in `launch/live-args.json`:
+Use `launch/docker-run-mtp3-validated.sh` (generated from the validated MTP3 container;
+non-secret fields only). Key knobs, full argv in `launch/mtp3-validated-args.json`:
 
 - `ROCM_AITER_FA`, `--mamba-cache-mode align`, MTP `num_speculative_tokens=3`
 - `--max-model-len 262144 --max-num-seqs 8 --max-num-batched-tokens 1567`
